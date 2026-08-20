@@ -1,0 +1,70 @@
+services:
+  # ===============================================
+  # Apache PHP Server
+  # ===============================================
+  www-penates:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: penates_www
+    user: "1000:1000"
+    volumes:
+      - ./docker/vhosts:/etc/apache2/sites-enabled
+      - ./:/var/www/html
+    networks: [archer-local-infra]
+    environment:
+      # --- Xdebug toggles (runtime, no rebuild needed to switch, use  docker-compose down && docker-compose up -d) ---
+      # off | debug | develop | profile | trace (comma-separated) debug,develop
+      XDEBUG_MODE: "off"
+    labels:
+      - traefik.enable=true
+
+      # Router (HTTP), used to redirect to HTTPS
+      - traefik.http.routers.penates-http.rule=Host(`penates.archer.local`)
+      - traefik.http.routers.penates-http.entrypoints=web
+      - traefik.http.routers.penates-http.middlewares=penates-redirect
+      # Redirect HTTP to HTTPS. Comment this line to disable HTTP -> HTTPS redirection
+      - traefik.http.middlewares.penates-redirect.redirectscheme.scheme=https
+
+      # Router (HTTPS)
+      - traefik.http.routers.penates-https.rule=Host(`penates.archer.local`)
+      - traefik.http.routers.penates-https.entrypoints=websecure
+      - traefik.http.routers.penates-https.tls=true
+
+      # Service: tell Traefik which port your container listens on
+      - traefik.http.services.penates.loadbalancer.server.port=80
+
+      # Router (HTTP, LAN)
+      # sslip.io redirects <name>.<ip>.sslip.io to <ip>: no DNS configuration required
+      - traefik.http.routers.penates-lan.rule=HostRegexp(`^penates\.[0-9.]+\.sslip\.io$`)
+      - traefik.http.routers.penates-lan.entrypoints=web
+
+
+  # ===============================================
+  # Database
+  # ===============================================
+  mariadb-penates:
+    image: mariadb:10.6.24
+    container_name: penates_db
+    # Port must be unique to each project/app
+    ports:
+      - "127.0.0.1:3308:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: penates
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    volumes:
+      - mariadb-penates:/var/lib/mysql
+      # This will be executed on first startup only !
+      - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks: [archer-local-infra]
+
+
+networks:
+  archer-local-infra:
+    external: true
+
+
+volumes:
+  mariadb-penates:

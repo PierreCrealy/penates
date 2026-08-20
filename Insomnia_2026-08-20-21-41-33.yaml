@@ -1,0 +1,453 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: Perso
+meta:
+  id: wrk_4473ac9f7cd04e5fb48c32f445e1e074
+  created: 1783947872348
+  modified: 1783947872348
+  description: ""
+collection:
+  - name: 1 — APOD
+    meta:
+      id: fld_c92b371ade7f441190a435552fd511fe
+      created: 1785784273511
+      modified: 1785784273511
+      sortKey: -100
+      description: Stockage disque + historique complet retenu. Archive depuis
+        1995-06-16, soit ~11 300 entrees. Verifier le poids moyen de hdurl avant
+        de lancer le backfill.
+  - name: 2 — Horizons
+    meta:
+      id: fld_cc5327511b094bc0959567b5be92f66c
+      created: 1785784273523
+      modified: 1785833974151
+      sortKey: -80
+      description: "Codes corps : Soleil 10, Mercure 199, Venus 299, Lune 301, Mars
+        499, Jupiter 599, Saturne 699, Uranus 799, Neptune 899, Pluton 999.
+        Petits corps (point-virgule obligatoire) : Ceres 1; Haumea 136108;
+        Makemake 136472; Eris 136199;"
+  - name: 3 — Miriad
+    meta:
+      id: fld_1e650bc75ada44a095fdbbeb1e06ea68
+      created: 1785787806633
+      modified: 1785833997478
+      sortKey: -90
+      description: ""
+  - name: Penates
+    meta:
+      id: fld_cafb20f56db5442f89837270b3e5eaea
+      created: 1787144343670
+      modified: 1787254731633
+      sortKey: -1787144343670
+      description: ""
+    children:
+      - name: Storages
+        meta:
+          id: fld_6e671680bd284ee3a9d43497516292f1
+          created: 1787149900454
+          modified: 1787149900454
+          sortKey: -1787149900454
+          description: ""
+        children:
+          - url: https://penates.archer.local/api/v1/storages
+            name: Index
+            meta:
+              id: req_b561bd838e6642cfb6504cedfa99577e
+              created: 1787144370050
+              modified: 1787236506353
+              isPrivate: false
+              description: ""
+              sortKey: -1787149904539
+            method: GET
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: https://penates.archer.local/api/v1/storages
+            name: Store
+            meta:
+              id: req_6f17116c1ea445c689dece440d9b120a
+              created: 1787150033225
+              modified: 1787235965731
+              isPrivate: false
+              description: ""
+              sortKey: -1786491954512
+            method: POST
+            body:
+              mimeType: multipart/form-data
+              params:
+                - name: name
+                  value: Lorem Ipsum
+                  description: ""
+                  disabled: false
+            headers:
+              - name: Content-Type
+                value: multipart/form-data
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: https://penates.archer.local/api/v1/storages/10
+            name: Show
+            meta:
+              id: req_7dbe55559b05417ea472442aa083e23d
+              created: 1787150052143
+              modified: 1787236261554
+              isPrivate: false
+              description: ""
+              sortKey: -1786162979498.5
+            method: GET
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: https://penates.archer.local/api/v1/storages/1
+            name: Update
+            meta:
+              id: req_74f12e89bd394f4ba85d8212289a4925
+              created: 1787150067352
+              modified: 1787235971584
+              isPrivate: false
+              description: ""
+              sortKey: -1785998491991.75
+            method: PUT
+            body:
+              mimeType: multipart/form-data
+              params:
+                - name: name
+                  value: Lorem Ipsum
+                  description: ""
+                  disabled: false
+            headers:
+              - name: Content-Type
+                value: multipart/form-data
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: https://penates.archer.local/api/v1/storages/1
+            name: Destroy
+            meta:
+              id: req_95ff277cc2a44ad6b6c96804f7491b8d
+              created: 1787150075532
+              modified: 1787235973792
+              isPrivate: false
+              description: ""
+              sortKey: -1785916248238.375
+            method: DELETE
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+      - name: Products
+        meta:
+          id: fld_37131941a461453b8fde4f4b4f666fd3
+          created: 1787150449405
+          modified: 1787150449405
+          sortKey: -1787147122062
+          description: ""
+        children:
+          - url: https://penates.archer.local/api/v1/products
+            name: Index
+            meta:
+              id: req_01a229ef56c84bc9ac4c22f009f571ac
+              created: 1787150449405
+              modified: 1787235976002
+              isPrivate: false
+              description: ""
+              sortKey: -1787149904539
+            method: GET
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: https://penates.archer.local/api/v1/products/1
+            name: Destroy
+            meta:
+              id: req_1b3540f6f6814c0096c5fbdbd9290952
+              created: 1787150449405
+              modified: 1787235985079
+              isPrivate: false
+              description: ""
+              sortKey: -1785916248238.375
+            method: DELETE
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: https://penates.archer.local/api/v1/products/1
+            name: Show
+            meta:
+              id: req_27e1f3e6030b46aca9d56819af86fac3
+              created: 1787150449405
+              modified: 1787236200769
+              isPrivate: false
+              description: ""
+              sortKey: -1786162979498.5
+            method: GET
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: https://penates.archer.local/api/v1/products
+            name: Store
+            meta:
+              id: req_aa61c22d7ee4426a90e5e80a4670528f
+              created: 1787150449405
+              modified: 1787235980940
+              isPrivate: false
+              description: ""
+              sortKey: -1786491954512
+            method: POST
+            body:
+              mimeType: multipart/form-data
+              params:
+                - name: name
+                  value: Lorem Ipsum
+                  description: ""
+                  disabled: false
+                - name: expired_at
+                  value: 31/08/2026
+                  description: ""
+                  disabled: false
+            headers:
+              - name: Content-Type
+                value: multipart/form-data
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: https://penates.archer.local/api/v1/products/1
+            name: Update
+            meta:
+              id: req_f4713d53941f46be99a293e379e88038
+              created: 1787150449405
+              modified: 1787235983030
+              isPrivate: false
+              description: ""
+              sortKey: -1785998491991.75
+            method: PUT
+            body:
+              mimeType: multipart/form-data
+              params:
+                - name: name
+                  value: Lorem Ipsum
+                  description: ""
+                  disabled: false
+                - name: expired_at
+                  value: 31/08/2026
+                  description: ""
+                  disabled: false
+            headers:
+              - name: Content-Type
+                value: multipart/form-data
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+      - name: Movements
+        meta:
+          id: fld_b88234f1d8164ca6a7606da2737a167a
+          created: 1787150457980
+          modified: 1787150457980
+          sortKey: -1787145732866
+          description: ""
+        children:
+          - url: https://penates.archer.local/api/v1/movements/1
+            name: Destroy
+            meta:
+              id: req_1125fa940cba487b800b4cc6c7c80b68
+              created: 1787150457980
+              modified: 1787236001651
+              isPrivate: false
+              description: ""
+              sortKey: -1785916248238.375
+            method: DELETE
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: https://penates.archer.local/api/v1/movements/2
+            name: Show
+            meta:
+              id: req_6eda6d8a2d2240abb0da3902b3399102
+              created: 1787150457980
+              modified: 1787236026078
+              isPrivate: false
+              description: ""
+              sortKey: -1786162979498.5
+            method: GET
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: https://penates.archer.local/api/v1/movements
+            name: Index
+            meta:
+              id: req_be418d0bb50246e1b499894ab176b481
+              created: 1787150457980
+              modified: 1787235987240
+              isPrivate: false
+              description: ""
+              sortKey: -1787149904539
+            method: GET
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: https://penates.archer.local/api/v1/movements
+            name: Store
+            meta:
+              id: req_d469dc8c37f74319aa8e86f2c107a902
+              created: 1787150457980
+              modified: 1787235990074
+              isPrivate: false
+              description: ""
+              sortKey: -1786491954512
+            method: POST
+            body:
+              mimeType: multipart/form-data
+              params:
+                - name: product_id
+                  value: "1"
+                  description: ""
+                  disabled: false
+                - name: storage_id
+                  value: "1"
+                  description: ""
+                  disabled: false
+                - name: quantity
+                  value: "10"
+                  description: ""
+                  disabled: false
+                - name: before
+                  value: "10"
+                  description: ""
+                  disabled: false
+                - name: after
+                  value: "20"
+                  description: ""
+                  disabled: false
+            headers:
+              - name: Content-Type
+                value: multipart/form-data
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: https://penates.archer.local/api/v1/movements/1
+            name: Update
+            meta:
+              id: req_ffae12e3a50a406daa0f53b4252af6db
+              created: 1787150457980
+              modified: 1787235995802
+              isPrivate: false
+              description: ""
+              sortKey: -1785998491991.75
+            method: PUT
+            body:
+              mimeType: multipart/form-data
+              params:
+                - name: product_id
+                  value: "1"
+                  description: ""
+                  disabled: false
+                - name: storage_id
+                  value: "1"
+                  description: ""
+                  disabled: false
+                - name: quantity
+                  value: "15"
+                  description: ""
+                  disabled: false
+                - name: before
+                  value: "10"
+                  description: ""
+                  disabled: false
+                - name: after
+                  value: "15"
+                  description: ""
+                  disabled: false
+            headers:
+              - name: Content-Type
+                value: multipart/form-data
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_26fed4e25af5f64520bed6482ec0e4b587278a69
+    created: 1783947872353
+    modified: 1783947872353
+environments:
+  name: Base Environment
+  meta:
+    id: env_26fed4e25af5f64520bed6482ec0e4b587278a69
+    created: 1783947872353
+    modified: 1785784449704
+    isPrivate: false
+  data:
+    nasa_key: x2oh835qcgGoS9FenkdzvoTx3H3gLswbo8rmYnS2
+    "": ""
