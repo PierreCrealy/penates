@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StorageRequest;
 use App\Http\Resources\StorageResource;
 use App\Models\Storage;
 use Illuminate\Http\Request;
@@ -15,12 +16,8 @@ class StorageController extends Controller
         return StorageResource::collection(Storage::with(['products'])->get());
     }
 
-    public function store(Request $request)
+    public function store(StorageRequest $request)
     {
-        $request->validate([
-            'name' => ['required'],
-        ]);
-
         $data = [
             'name' => $request->input('name'),
             'slug' => Str::slug($request->input('name')),
@@ -34,12 +31,8 @@ class StorageController extends Controller
         return new StorageResource($storage->load(['products']));
     }
 
-    public function update(Request $request, Storage $storage)
+    public function update(StorageRequest $request, Storage $storage)
     {
-        $request->validate([
-            'name' => ['required'],
-        ]);
-
         $data = [
             'name' => $request->input('name'),
             'slug' => Str::slug($request->input('name')),

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductRequest;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -14,15 +15,11 @@ class ProductController extends Controller
         return ProductResource::collection(Product::with(['movements', 'storages'])->get());
     }
 
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        $request->validate([
-            'name'       => ['required'],
-            'expired_at' => ['required', 'date'],
-        ]);
-
         $data = [
             'name'       => $request->input('name'),
+            'quantity'   => $request->input('quantity'),
             'expired_at' => $request->input('expired_at'),
         ];
 
@@ -34,15 +31,11 @@ class ProductController extends Controller
         return new ProductResource($product->load(['movements', 'storages']));
     }
 
-    public function update(Request $request, Product $product)
+    public function update(ProductRequest $request, Product $product)
     {
-        $request->validate([
-            'name'       => ['required'],
-            'expired_at' => ['required', 'date'],
-        ]);
-
         $data = [
             'name'       => $request->input('name'),
+            'quantity'   => $request->input('quantity'),
             'expired_at' => $request->input('expired_at'),
         ];
 

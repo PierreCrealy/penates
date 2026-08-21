@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\web;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -21,19 +22,15 @@ class ProductController extends Controller
         return Inertia::render('products/show', compact('product'));
     }
 
-    public function update(Request $request, Product $product)
+    public function update(ProductRequest $request, Product $product)
     {
-        $request->validate([
-            'name'           => ['required'],
-            'quantity'       => ['required', 'numeric'],
-            'expired_at'     => ['required', 'date'],
-            'movements'      => ['nullable', 'array'],
-            'movements.*.id' => ['nullable', 'exists:movements,id'],
-            'storages'       => ['nullable', 'array'],
-            'storages.*.id'  => ['nullable', 'exists:storages,id'],
-        ]);
+        $data = [
+            'name'       => $request->input('name'),
+            'quantity'   => $request->input('quantity'),
+            'expired_at' => $request->input('expired_at'),
+        ];
 
-        $product->update($request->only('name', 'quantity', 'expired_at'));
+        $product->update($data);
         $product->storages()->sync($request->input('storages'));
 
         return Inertia::render('products/update', compact('product'));
@@ -44,19 +41,15 @@ class ProductController extends Controller
         return Inertia::render('products/create');
     }
 
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        $request->validate([
-            'name'           => ['required'],
-            'quantity'       => ['required', 'numeric'],
-            'expired_at'     => ['required', 'date'],
-            'movements'      => ['nullable', 'array'],
-            'movements.*.id' => ['nullable', 'exists:movements,id'],
-            'storages'       => ['nullable', 'array'],
-            'storages.*.id'  => ['nullable', 'exists:storages,id'],
-        ]);
+        $data = [
+            'name'       => $request->input('name'),
+            'quantity'   => $request->input('quantity'),
+            'expired_at' => $request->input('expired_at'),
+        ];
 
-        $newProduct = Product::create($request->only('name', 'quantity', 'expired_at'));
+        $newProduct = Product::create($data);
         $newProduct->storages()->attach($request->input('storages'));
 
         return redirect()->route('products.index');

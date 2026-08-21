@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\web;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\MovementRequest;
 use App\Models\Movement;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -21,16 +22,17 @@ class MovementController extends Controller
         return Inertia::render('movements/show', compact('movement'));
     }
 
-    public function update(Request $request, Movement $movement)
+    public function update(MovementRequest $request, Movement $movement)
     {
-        $request->validate([
-            'product_id' => ['required', 'exists:products,id'],
-            'storage_id' => ['required', 'exists:storages,id'],
-            'quantity'   => ['required', 'integer'],
-            'type'       => ['required'],
-        ]);
+        $data = [
+            'product_id' => $request->input('product_id'),
+            'storage_id' => $request->input('storage_id'),
+            'quantity'   => $request->input('quantity'),
+            'before'     => $request->input('before'),
+            'after'      => $request->input('after'),
+        ];
 
-        $movement->update($request->only('product_id', 'storage_id', 'quantity', 'type'));
+        $movement->update($data);
 
         return Inertia::render('movements/update', compact('movement'));
     }
@@ -40,16 +42,17 @@ class MovementController extends Controller
         return Inertia::render('movements/create');
     }
 
-    public function store(Request $request)
+    public function store(MovementRequest $request)
     {
-        $request->validate([
-                    'product_id' => ['required', 'exists:products,id'],
-                    'storage_id' => ['required', 'exists:storages,id'],
-                    'quantity'   => ['required', 'integer'],
-                    'type'       => ['required'],
-                ]);
+        $data = [
+            'product_id' => $request->input('product_id'),
+            'storage_id' => $request->input('storage_id'),
+            'quantity'   => $request->input('quantity'),
+            'before'     => $request->input('before'),
+            'after'      => $request->input('after'),
+        ];
 
-        Movement::create($request->only('product_id', 'storage_id', 'quantity', 'type'));
+        Movement::create($data);
 
         return redirect()->route('movements.index');
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\web;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StorageRequest;
 use App\Models\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -22,14 +23,8 @@ class StorageController extends Controller
         return Inertia::render('storages/show', compact('storage'));
     }
 
-    public function update(Request $request, Storage $storage)
+    public function update(StorageRequest $request, Storage $storage)
     {
-        $request->validate([
-            'name'          => ['required'],
-            'products'      => ['nullable', 'array'],
-            'products.*.id' => ['nullable', 'exists:products,id']
-        ]);
-
         $storage->update([
             'name' => $request->input('name'),
             'slug' => Str::slug($request->input('name')),
@@ -45,14 +40,8 @@ class StorageController extends Controller
         return Inertia::render('storages/create');
     }
 
-    public function store(Request $request)
+    public function store(StorageRequest $request)
     {
-        $request->validate([
-            'name'          => ['required'],
-            'products'      => ['nullable', 'array'],
-            'products.*.id' => ['nullable', 'exists:products,id']
-        ]);
-
         $newStorage = Storage::create([
             'name' => $request->input('name'),
             'slug' => Str::slug($request->input('name')),
