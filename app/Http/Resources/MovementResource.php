@@ -22,8 +22,8 @@ class MovementResource extends JsonResource
             'updated_at' => $this->updated_at,
 
             // Relations
-            'product' => ProductResource::collection($this->whenLoaded('product')),
-            'storage' => StorageResource::collection($this->whenLoaded('storage')),
+            'product' => new ProductResource($this->whenLoaded('product')),
+            'storage' => new StorageResource($this->whenLoaded('storage')),
         ];
     }
 }

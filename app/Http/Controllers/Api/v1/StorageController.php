@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\api\v1;
+namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\StorageResource;
@@ -12,7 +12,7 @@ class StorageController extends Controller
 {
     public function index()
     {
-        return StorageResource::collection(Storage::all());
+        return StorageResource::collection(Storage::with(['products'])->get());
     }
 
     public function store(Request $request)
@@ -31,7 +31,7 @@ class StorageController extends Controller
 
     public function show(Storage $storage)
     {
-        return new StorageResource($storage);
+        return new StorageResource($storage->load(['products']));
     }
 
     public function update(Request $request, Storage $storage)

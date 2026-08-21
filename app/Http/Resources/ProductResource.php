@@ -18,7 +18,6 @@ class ProductResource extends JsonResource
             'expired_at' => $this->expired_at,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'movements_count' => $this->movements_count,
 
             // Relations
             'movements' => MovementResource::collection($this->whenLoaded('movements')),

@@ -50,7 +50,11 @@ class Product extends Model
 
     public function getQuantityAttribute()
     {
-        return $this->storages->sum('pivot.quantity') ?? 0;
+        if ($this->relationLoaded('storages')) {
+            return $this->storages->sum('pivot.quantity') ?? 0;
+        }
+
+        return $this->storages()->sum('product_storages.quantity') ?? 0;
     }
 
     public function registerMediaConversions(?Media $media = null): void

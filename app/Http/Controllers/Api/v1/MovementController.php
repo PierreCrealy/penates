@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\api\v1;
+namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\MovementResource;
@@ -11,7 +11,7 @@ class MovementController extends Controller
 {
     public function index()
     {
-        return MovementResource::collection(Movement::all());
+        return MovementResource::collection(Movement::with(['product', 'storage'])->get());
     }
 
     public function store(Request $request)
@@ -37,7 +37,7 @@ class MovementController extends Controller
 
     public function show(Movement $movement)
     {
-        return new MovementResource($movement);
+        return new MovementResource($movement->load(['product', 'storage']));
     }
 
     public function update(Request $request, Movement $movement)
